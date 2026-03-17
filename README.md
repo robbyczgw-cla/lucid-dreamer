@@ -132,8 +132,8 @@ Lucid takes the best concepts from each and implements them with zero infrastruc
 ## Roadmap
 
 - [x] V1 — Nightly review, state ledger, human approval
-- [ ] V1.5 — Morning summary (short Telegram/Discord message)
-- [ ] V1.5 — Auto-apply for high-confidence suggestions
+- [x] V1 — Automatic delivery via announce (Telegram/Discord/etc.)
+- [ ] V1.5 — Auto-apply for high-confidence, low-risk suggestions
 - [ ] V2 — Embedding-based dedup for similar suggestions
 - [ ] V2 — Auto-promotion (facts referenced N times → suggest for memory)
 - [ ] V2 — Weekly consolidation
