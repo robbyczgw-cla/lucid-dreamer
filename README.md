@@ -140,7 +140,62 @@ Lucid is purely a **prompt + cron + markdown** system. If you have a cron job th
 
 ## Usage
 
-Currently deployed as an OpenClaw cron job. Skill packaging coming in V3.
+### Quick Start (OpenClaw)
+
+1. **Create the review directory:**
+```bash
+mkdir -p memory/review
+```
+
+2. **Add the cron job:**
+```bash
+openclaw cron add \
+  --name "lucid" \
+  --cron "0 3 * * *" \
+  --tz "Europe/Vienna" \
+  --model "anthropic/claude-sonnet-4-6" \
+  --announce \
+  --session isolated \
+  --timeout-seconds 120 \
+  --message "$(cat prompts/nightly-review.md)"
+```
+
+3. **Wait for the first review** (or trigger manually):
+```bash
+openclaw cron run <job-id>
+```
+
+4. **Review the output:**
+```bash
+cat memory/review/YYYY-MM-DD.md
+```
+
+5. **Approve or reject suggestions** — Tell your agent which suggestions to accept. It updates `MEMORY.md` and sets the status in `memory/review/state.json`.
+
+### What you need in your workspace
+
+```
+your-workspace/
+├── MEMORY.md                    # Long-term curated memory (Lucid suggests changes)
+├── USER.md                      # User profile (Lucid reads for context)
+├── memory/
+│   ├── 2026-03-15.md            # Daily notes (Lucid reads last 7 days)
+│   ├── 2026-03-16.md
+│   ├── 2026-03-17.md
+│   └── review/                  # Lucid output directory
+│       ├── 2026-03-17.md        # Nightly review (human-readable)
+│       ├── state.json           # Suggestion ledger (machine-readable)
+│       └── .last-success        # Health sentinel (ISO timestamp)
+```
+
+### Without OpenClaw
+
+Lucid is just a prompt. You can run it with any LLM that supports:
+- Reading files from a workspace
+- Writing files to a workspace
+- Being triggered on a schedule
+
+Copy the prompt from `prompts/nightly-review.md`, feed it to your LLM with access to your memory files, and save the output. The prompt handles everything — review format, decision policy, state ledger updates.
 
 ## License
 
