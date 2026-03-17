@@ -122,6 +122,22 @@ lucid/
 - [ ] **V2** — Weekly consolidation of insights
 - [ ] **V3** — ClawHub skill publication (configurable taxonomy, output destinations)
 
+## Requirements
+
+- **OpenClaw** with cron support (`agentTurn` jobs)
+- **Any LLM** that can read files and write markdown (Sonnet recommended, Haiku works for budget)
+- **Markdown-based memory** — `MEMORY.md` + `memory/YYYY-MM-DD.md` daily notes (OpenClaw default)
+
+### What Lucid does NOT need
+
+- ❌ No vector database
+- ❌ No embeddings (OpenClaw's built-in `memory_search` with embeddings is separate and independent — Lucid doesn't use it)
+- ❌ No SQLite or any database
+- ❌ No external APIs beyond the LLM call
+- ❌ No Python, no Node packages, no runtime dependencies
+
+Lucid is purely a **prompt + cron + markdown** system. If you have a cron job that can call an LLM and read/write files, you can run Lucid.
+
 ## Usage
 
 Currently deployed as an OpenClaw cron job. Skill packaging coming in V3.
