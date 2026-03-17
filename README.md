@@ -97,7 +97,7 @@ Built on ideas from:
 - **[Gigabrain](https://github.com/legendaryvibecoder/gigabrain)** — World Model (entities, beliefs, episodes), suggestion ledger
 - **[Nuggets](https://github.com/NeoVertex1/nuggets)** — Promotion concept (frequently recalled → permanent memory)
 
-Our approach: steal the **ideas**, implement as pure Cron + Markdown with zero infrastructure.
+Our approach: take the **best concepts**, implement as pure Cron + Markdown with zero infrastructure.
 
 ## Architecture
 
