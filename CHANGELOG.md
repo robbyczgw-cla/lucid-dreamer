@@ -6,6 +6,26 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [0.2.0] — 2026-03-18
+
+### Added
+- **Auto-Apply** for high-confidence, low-risk suggestions:
+  - Version numbers in skill/plugin tables
+  - Stale Cron IDs where removal is documented
+  - New project entries with complete details (2+ days mentioned)
+- **Git integration**: auto-apply commits to local git with descriptive message (`dreamer: auto-apply — DESCRIPTION`)
+- **Rollback**: `git revert <hash>` to undo any auto-applied change
+- Review file now has `## ✅ Auto-Applied` section showing what was applied automatically
+
+### Changed
+- Review format updated: auto-applied changes shown separately from pending decisions
+- State ledger: auto-applied suggestions tracked as `accepted` immediately
+
+### Never Auto-Applied (by design)
+- Belief Updates, Key Decisions, Family/personal facts
+- Model Strategy preferences
+- Anything with uncertainty
+
 ## [0.1.0] — 2026-03-16
 
 ### Added
