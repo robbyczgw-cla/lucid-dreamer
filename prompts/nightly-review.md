@@ -16,6 +16,9 @@ Calculate the dates for the last 7 days from TODAY. For each date in YYYY-MM-DD 
 ### Step 4: Read the suggestion ledger
 Try to read `memory/review/state.json`. If it does not exist, start with an empty suggestions array.
 
+### Step 4b: Read auto-apply config (optional)
+If `config/auto-apply.md` exists in the Lucid directory, read it to determine which categories are enabled for auto-apply. If it doesn't exist, use the defaults defined in Step 7 below.
+
 ### Step 5: NEVER read previous reviews
 Do NOT read any files matching `memory/review/*.md`. This prevents circular reasoning.
 

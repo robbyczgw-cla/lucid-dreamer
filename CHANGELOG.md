@@ -15,7 +15,9 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
   - Model Strategy — agent counts, new agent entries when fully documented
   - Closed Open Loops — remove resolved items with explicit closure signal on 2+ days
   - Stale project status — update planning/in-progress to live when URL + service confirmed
+- **`config/auto-apply.md`** — configurable file to enable/disable auto-apply categories per project. Edit it to go conservative, aggressive, or anywhere in between.
 - **Stricter confidence gate**: medium/low confidence items never auto-applied (only high)
+- Prompt reads `config/auto-apply.md` at runtime if present (Step 4b)
 
 ## [0.2.0] — 2026-03-18
 

@@ -110,6 +110,34 @@ Every suggestion gets tracked in `state.json` so you don't see the same thing tw
 - **rejected** → Gone, won't come back
 - **deferred** → Come back in 14 days
 
+## Auto-Apply Configuration
+
+Lucid can automatically apply high-confidence changes without requiring your review. This is opt-in and configurable.
+
+**Edit `config/auto-apply.md`** to control which categories are auto-applied:
+
+```
+config/auto-apply.md
+├── ✅ Enabled categories (edit freely)
+│   ├── Version numbers
+│   ├── New project entries (2+ days mentioned)
+│   ├── Infrastructure facts (cron IDs, ports, paths)
+│   ├── Lessons Learned (factual only)
+│   ├── Closed Open Loops
+│   └── Stale project status
+└── ❌ Never auto-applied (hardcoded)
+    ├── Belief updates / opinions
+    ├── Key decisions
+    ├── Family/personal facts
+    └── Anything with medium or low confidence
+```
+
+**Conservative setup?** Remove all enabled categories — Lucid still generates suggestions but never applies them.
+
+**Aggressive setup?** Keep all categories — just watch for false positives early on.
+
+All auto-applied changes are git-committed with a `dreamer: auto-apply —` prefix so you can always `git revert` them.
+
 ## Safety Rules
 
 Lucid is conservative by design:
@@ -118,7 +146,7 @@ Lucid is conservative by design:
 - Only flags stale entries if the newer info **clearly** replaces the old
 - **Never** suggests adding passwords, API keys, tokens, or temporary debug info
 - Every suggestion includes a source link to the original daily note
-- Nothing is auto-applied — you always decide
+- Auto-apply only triggers on **high confidence** — medium/low always require human review
 
 ## Inspiration
 
@@ -134,6 +162,8 @@ Lucid takes the best concepts from each and implements them with zero infrastruc
 - [x] V1 — Nightly review, state ledger, human approval
 - [x] V1 — Automatic delivery via announce (Telegram/Discord/etc.)
 - [x] V1.5 — Auto-apply for high-confidence, low-risk suggestions (git-backed, revertable)
+- [x] V1.5 — Configurable auto-apply categories via `config/auto-apply.md`
+- [x] V1.5 — Stricter confidence gate: medium/low never auto-applied
 - [ ] V2 — Embedding-based dedup for similar suggestions
 - [ ] V2 — Auto-promotion (facts referenced N times → suggest for memory)
 - [ ] V2 — Weekly consolidation
