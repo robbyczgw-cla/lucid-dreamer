@@ -36,6 +36,11 @@ For suggestions that are HIGH confidence AND fall into these safe categories, ap
 - **Stale Cron IDs** where the note clearly states the cron was removed/replaced
 - **Service/port deletions** clearly documented as removed
 - **New project entries** with complete details (URL, repo, path, service) mentioned on 2+ days
+- **Infrastructure facts** — new cron IDs, script paths, service names, port assignments (factual, no opinion)
+- **Lessons Learned** — purely factual technical lessons (not preferences or opinions)
+- **Model Strategy** — agent counts, new agent entries when clearly documented with model + alias
+- **Closed Open Loops** — remove resolved items from MEMORY.md when there is explicit closure signal on 2+ days
+- **Stale project status** — update "planning" or "in progress" to "live" when URL + service are confirmed on 2+ days
 
 For AUTO-APPLY:
 1. Edit MEMORY.md directly using the write tool
@@ -49,6 +54,7 @@ Do NOT auto-apply:
 - Anything about Robby's preferences or communication style
 - OpenCami status changes
 - Anything you are uncertain about
+- Anything with medium or low confidence
 
 ### Step 8: Generate review file
 Create `memory/review/TODAY.md` with:
