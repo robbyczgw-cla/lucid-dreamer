@@ -6,6 +6,17 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [0.3.0] — 2026-03-21
+
+### Added
+- **Extended Auto-Apply categories** (5 new safe classes):
+  - Infrastructure facts — cron IDs, script paths, service names, port assignments
+  - Lessons Learned — purely factual technical lessons
+  - Model Strategy — agent counts, new agent entries when fully documented
+  - Closed Open Loops — remove resolved items with explicit closure signal on 2+ days
+  - Stale project status — update planning/in-progress to live when URL + service confirmed
+- **Stricter confidence gate**: medium/low confidence items never auto-applied (only high)
+
 ## [0.2.0] — 2026-03-18
 
 ### Added
