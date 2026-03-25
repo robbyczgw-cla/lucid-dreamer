@@ -18,6 +18,7 @@ AI agents forget. Between sessions, context is lost. Long-term memory files (`ME
 - 🔄 Tracks when your opinions or plans changed
 - 🗑️ Catches outdated entries in your memory files
 - 📎 Suggests merging duplicate entries
+- 📈 Detects recurring issues, stale projects, and repeated mistakes over 14 days
 
 You wake up to a short report. You approve what's useful, reject what's not. Done.
 
@@ -101,6 +102,31 @@ your-workspace/
 - ❌ No external APIs beyond the LLM call
 - ❌ No Python, no Node packages, no runtime dependencies
 
+## Trend Detection (v0.4.0)
+
+Lucid now analyzes patterns across the last **14 days** of daily notes:
+
+### 🔁 Recurring Issues
+Scans for repeated problem keywords (errors, failures, timeouts, etc.) and clusters similar phrases. If the same issue appears on **3+ separate days**, it's flagged as a Recurring Issue.
+
+### 🕸️ Stale Projects
+Tracks projects listed in MEMORY.md. If a project hasn't been mentioned in **any** daily note for 30+ days, it's flagged as Possibly Stale with its last mention date.
+
+### ⚠️ Escalated Patterns
+Detects the same lesson learned or mistake appearing in **3+ daily notes** — a signal that the pattern hasn't been broken despite awareness.
+
+### Output
+Trends appear as a `## Trends` section in the nightly review file. Trend data is also persisted in `state.json` under the `trends` key for historical tracking.
+
+### Standalone Usage
+```bash
+python3 scripts/trend_detection.py \
+  --workspace /path/to/workspace \
+  --days 14 \
+  --stale-days 30 \
+  --state memory/review/state.json
+```
+
 ## Suggestion Tracking
 
 Every suggestion gets tracked in `state.json` so you don't see the same thing twice:
@@ -164,6 +190,7 @@ Lucid takes the best concepts from each and implements them with zero infrastruc
 - [x] V1.5 — Auto-apply for high-confidence, low-risk suggestions (git-backed, revertable)
 - [x] V1.5 — Configurable auto-apply categories via `config/auto-apply.md`
 - [x] V1.5 — Stricter confidence gate: medium/low never auto-applied
+- [x] V1.5 — Trend Detection: recurring issues, stale projects, escalated patterns (14-day window)
 - [ ] V2 — Embedding-based dedup for similar suggestions
 - [ ] V2 — Auto-promotion (facts referenced N times → suggest for memory)
 - [ ] V2 — Weekly consolidation
