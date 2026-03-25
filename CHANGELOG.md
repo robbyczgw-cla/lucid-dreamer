@@ -6,6 +6,23 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [0.4.0] — 2026-03-25
+
+### Added
+- **Trend Detection** module (`scripts/trend_detection.py`) — analyzes patterns across 14 days of daily notes:
+  - **Recurring Issues** — flags topics/problems appearing on 3+ separate days (e.g., "backup failed", "tailscale down")
+  - **Stale Project Detection** — finds projects in MEMORY.md not mentioned in any daily note for 30+ days
+  - **Escalated Patterns** — detects the same lesson/mistake appearing in 3+ daily notes (repeated mistakes not yet fixed)
+- New `## Trends` section in nightly review output (`memory/review/YYYY-MM-DD.md`)
+- Trend history tracking in `state.json` under `trends` key (accumulates across runs, keeps last 30 entries)
+- Nightly review prompt updated with Step 7b to invoke trend detection script
+- Example review and state files updated with trend output samples
+
+### Technical Details
+- Standalone Python script with no external dependencies (stdlib only)
+- Uses difflib SequenceMatcher for fuzzy clustering of similar issues/lessons
+- Configurable via CLI flags: `--days`, `--stale-days`, `--min-recurrence`
+
 ## [0.3.0] — 2026-03-21
 
 ### Added

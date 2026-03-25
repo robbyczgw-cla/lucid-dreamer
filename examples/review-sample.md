@@ -140,6 +140,26 @@
 
 ---
 
+## Trends
+
+### 🔁 Recurring Issues
+_Same issue/topic flagged on 3+ separate days in the last 14 days._
+
+1. **tailscale down / disconnect** — appeared on 4 days (2026-03-10, 2026-03-12, 2026-03-14, 2026-03-15)
+2. **personas --force update pending** — appeared on 7 days (2026-03-10, 2026-03-11, 2026-03-12, 2026-03-13, 2026-03-14, 2026-03-15, 2026-03-16)
+
+### 🕸️ Possibly Stale Projects
+_Projects in MEMORY.md not mentioned in any daily note for 30+ days._
+
+_All tracked projects appear active._
+
+### ⚠️ Escalated Patterns (Repeated Mistakes)
+_Same lesson/mistake appearing in 3+ daily notes — pattern not yet broken._
+
+_No escalated patterns detected._
+
+---
+
 ## Duplicate/Merge Suggestions
 
 ### 1. Hermes Agent — Scattered Across Notes

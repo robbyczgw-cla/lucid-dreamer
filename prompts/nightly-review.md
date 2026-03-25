@@ -59,6 +59,22 @@ Do NOT auto-apply:
 - Anything you are uncertain about
 - Anything with medium or low confidence
 
+### Step 7b: Run Trend Detection
+
+Run the trend detection script to analyze patterns across the last 14 days:
+
+```bash
+python3 /root/clawd/projects/lucid/scripts/trend_detection.py \
+  --workspace "$(pwd)" \
+  --date "$(date +%Y-%m-%d)" \
+  --days 14 \
+  --stale-days 30 \
+  --state memory/review/state.json
+```
+
+Capture the stdout output — this is the `## Trends` section to include in the review file.
+If the script fails or no daily notes exist, skip the Trends section gracefully.
+
 ### Step 8: Generate review file
 Create `memory/review/TODAY.md` with:
 
@@ -83,6 +99,10 @@ Create `memory/review/TODAY.md` with:
 
 ## Stale Facts (needs your decision)
 <!-- Non-safe stale entries -->
+
+## Trends
+<!-- Output from trend_detection.py — recurring issues, stale projects, escalated patterns -->
+<!-- If script produced no output, write: "No trends detected." -->
 ```
 
 ### Decision Policy (MANDATORY):
