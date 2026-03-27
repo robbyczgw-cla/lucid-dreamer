@@ -9,7 +9,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 ## [0.5.0] — 2026-03-27
 
 ### Fixed
-- Portability fixes: removed hardcoded `/root/clawd` paths, fixed config loading in `trend_detection.py` to look relative to script dir first, fixed loop bug where `args.days` (could be None) was used instead of resolved `days` variable, cleared hardcoded telegram topic from default config
+- Portability fixes: removed hardcoded workspace paths, fixed config loading in `trend_detection.py` to look relative to script dir first, fixed loop bug where `args.days` (could be None) was used instead of resolved `days` variable, cleared hardcoded telegram topic from default config
 
 ## [0.4.0] — 2026-03-25
 
