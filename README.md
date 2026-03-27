@@ -170,7 +170,8 @@ Lucid is conservative by design:
 
 - Only suggests new facts if mentioned on **2+ separate days**
 - Only flags stale entries if the newer info **clearly** replaces the old
-- **Never** suggests adding passwords, API keys, tokens, or temporary debug info
+- Designed to avoid suggesting passwords, API keys, tokens, or temporary debug info in memory updates
+- ⚠️ The skill reads all workspace markdown files. Do not run on a workspace containing unencrypted API keys or secrets in plain markdown files.
 - Every suggestion includes a source link to the original daily note
 - Auto-apply only triggers on **high confidence** — medium/low always require human review
 
