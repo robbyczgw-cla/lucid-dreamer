@@ -102,7 +102,7 @@ your-workspace/
 - ❌ No external APIs beyond the LLM call
 - ❌ No Python, no Node packages, no runtime dependencies
 
-## Trend Detection (v0.4.0)
+## Trend Detection (v0.5.0)
 
 Lucid now analyzes patterns across the last **14 days** of daily notes:
 

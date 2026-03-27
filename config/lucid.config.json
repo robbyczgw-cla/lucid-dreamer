@@ -39,9 +39,10 @@
     "requireMultipleDays": true
   },
 
+  "_comment_topic": "Set this to your notification target, e.g. telegram:-1234567890:topic:5. Leave null to use main chat.",
   "notifications": {
     "announceOnDelivery": true,
     "channel": "telegram",
-    "topic": "telegram:-1003796178074:topic:6"
+    "topic": null
   }
 }
