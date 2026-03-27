@@ -19,18 +19,19 @@
   },
 
   "autoApply": {
-    "enabled": true,
+    "enabled": false,
     "categories": {
-      "versionNumbers": true,
-      "staleCronIds": true,
-      "servicePortDeletions": true,
-      "newProjectEntries": true,
-      "infrastructureFacts": true,
-      "lessonsLearned": true,
-      "modelStrategy": true,
-      "closedOpenLoops": true,
-      "staleProjectStatus": true
-    }
+      "versionNumbers": false,
+      "staleCronIds": false,
+      "servicePortDeletions": false,
+      "newProjectEntries": false,
+      "infrastructureFacts": false,
+      "lessonsLearned": false,
+      "modelStrategy": false,
+      "closedOpenLoops": false,
+      "staleProjectStatus": false
+    },
+    "_note": "Auto-apply is opt-in. Set enabled: true to activate."
   },
 
   "review": {
