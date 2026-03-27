@@ -460,7 +460,10 @@ def update_state_trends(state_path: str, recurring: list, stale: list, escalated
 
 def load_config(workspace: Path) -> dict:
     """Load lucid.config.json if it exists, return defaults otherwise."""
-    config_path = workspace / "config" / "lucid.config.json"
+    script_dir = Path(__file__).resolve().parent.parent
+    config_path = script_dir / "config" / "lucid.config.json"
+    if not config_path.exists():
+        config_path = workspace / "config" / "lucid.config.json"
     if config_path.exists():
         try:
             with open(config_path, encoding="utf-8") as f:
@@ -515,7 +518,7 @@ def main():
 
     # Read daily notes
     daily_notes: dict[str, str] = {}
-    for date_str in date_range(today, args.days):
+    for date_str in date_range(today, days):
         content = read_file(workspace / "memory" / f"{date_str}.md")
         if content:
             daily_notes[date_str] = content

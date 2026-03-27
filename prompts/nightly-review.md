@@ -47,7 +47,7 @@ For suggestions that are HIGH confidence AND fall into these safe categories, ap
 
 For AUTO-APPLY:
 1. Edit MEMORY.md directly using the write tool
-2. Run `cd /root/clawd && git add MEMORY.md && git commit -m "dreamer: auto-apply — DESCRIPTION"` 
+2. Run `cd "${CLAWD_DIR:-.}" && git add MEMORY.md && git commit -m "dreamer: auto-apply — DESCRIPTION"` 
 3. Track these in state.json with status "accepted"
 
 Do NOT auto-apply:
@@ -64,7 +64,7 @@ Do NOT auto-apply:
 Run the trend detection script to analyze patterns across the last 14 days:
 
 ```bash
-python3 /root/clawd/projects/lucid/scripts/trend_detection.py \
+python3 scripts/trend_detection.py \
   --workspace "$(pwd)" \
   --date "$(date +%Y-%m-%d)" \
   --days 14 \
