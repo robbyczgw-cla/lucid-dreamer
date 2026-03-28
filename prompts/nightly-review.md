@@ -7,8 +7,11 @@ Run `date +%Y-%m-%d` to get today's date. Store it as TODAY.
 
 ### Step 2: Read core memory files
 Use the `read` tool to read these files:
-1. `MEMORY.md` — long-term curated memory
-2. `USER.md` — user profile
+1. `USER.md` — user profile
+2. Memory source:
+   - Prefer sectioned memory when available: read `memory/index.md` first, then read `memory/sections/identity.md` and `memory/sections/operations.md`
+   - Read additional `memory/sections/*.md` files as needed to fully understand the current memory state
+   - If `memory/sections/` does not exist, fall back to reading `MEMORY.md`
 
 ### Step 3: Read last 7 days of daily notes
 Calculate the dates for the last 7 days from TODAY. For each date in YYYY-MM-DD format, attempt to read `memory/YYYY-MM-DD.md`. Skip missing files silently.
@@ -25,30 +28,50 @@ Do NOT read any files matching `memory/review/*.md`. This prevents circular reas
 ### Step 6: Analyze
 
 Look for:
-- New facts/decisions that should be in MEMORY.md but aren't
+- New facts/decisions that should be in long-term memory but aren't
 - Open todos/decisions that were never resolved
 - Recurring problems across multiple days
 - Intentional course corrections (belief updates)
-- MEMORY.md entries that are now outdated
-- Duplicate/overlapping entries in MEMORY.md
+- Memory entries that are now outdated
+- Duplicate/overlapping entries across memory sections (or within `MEMORY.md` fallback)
+
+### Step 6b: Contradiction Scan
+Compare long-term memory against the last 7 days of daily notes and look specifically for contradictions.
+
+Contradiction types:
+1. **Version conflicts** — memory says one version, notes say it was upgraded/downgraded
+2. **Status conflicts** — memory says planning/in progress, notes say deployed/live/removed
+3. **Existence conflicts** — memory lists a service/project/cron that notes say was removed
+4. **Value conflicts** — ports, paths, names, IDs, URLs, or counts changed
+5. **Decision reversals** — memory records decision X, notes say the choice changed to Y
+
+For each contradiction found:
+- Quote both the memory text and the daily note evidence
+- Classify it as:
+  - **Factual contradiction** — objective and safe to auto-apply when confidence is HIGH
+  - **Judgment contradiction** — involves preference, strategy, opinion, or ambiguous intent; human review required
+- If the contradiction is factual, explicit, and current, include it in auto-apply consideration for Step 7
+- If the contradiction is judgment-based or uncertain, include it in the review output only
 
 ### Step 7: AUTO-APPLY high-confidence safe changes
 
-For suggestions that are HIGH confidence AND fall into these safe categories, apply them directly to MEMORY.md:
-- **Version numbers** in Published Skills or Plugin tables that are clearly outdated
+For suggestions that are HIGH confidence AND fall into these safe categories, apply them directly to long-term memory:
+- **Version numbers** in published skill/plugin tables that are clearly outdated
 - **Stale Cron IDs** where the note clearly states the cron was removed/replaced
 - **Service/port deletions** clearly documented as removed
 - **New project entries** with complete details (URL, repo, path, service) mentioned on 2+ days
-- **Infrastructure facts** — new cron IDs, script paths, service names, port assignments (factual, no opinion)
+- **Infrastructure facts** — new cron IDs, script paths, service names, port assignments
 - **Lessons Learned** — purely factual technical lessons (not preferences or opinions)
 - **Model Strategy** — agent counts, new agent entries when clearly documented with model + alias
-- **Closed Open Loops** — remove resolved items from MEMORY.md when there is explicit closure signal on 2+ days
+- **Closed Open Loops** — remove resolved items when there is explicit closure signal on 2+ days
 - **Stale project status** — update "planning" or "in progress" to "live" when URL + service are confirmed on 2+ days
+- **Factual contradictions** — explicit memory-vs-note conflicts where the newer daily note evidence is objective and HIGH confidence
 
 For AUTO-APPLY:
-1. Edit MEMORY.md directly using the write tool
-2. Run `cd "${CLAWD_DIR:-.}" && git add MEMORY.md && git commit -m "dreamer: auto-apply — DESCRIPTION"` 
-3. Track these in state.json with status "accepted"
+1. Edit the relevant `memory/sections/*.md` file(s) directly when sectioned memory exists; otherwise edit `MEMORY.md`
+2. Update `memory/index.md` `Last Updated` values for any changed section files
+3. Run `cd "${CLAWD_DIR:-.}" && git add MEMORY.md memory/index.md memory/sections && git commit -m "dreamer: auto-apply — DESCRIPTION"`
+4. Track these in state.json with status `accepted`
 
 Do NOT auto-apply:
 - Belief Updates (opinions, model preferences, strategy)
@@ -56,6 +79,7 @@ Do NOT auto-apply:
 - Family/personal facts
 - Anything about Robby's preferences or communication style
 - OpenCami status changes
+- Judgment contradictions
 - Anything you are uncertain about
 - Anything with medium or low confidence
 
@@ -82,7 +106,7 @@ Create `memory/review/TODAY.md` with:
 # Memory Review — TODAY
 
 ## ✅ Auto-Applied
-<!-- List what was automatically applied to MEMORY.md with brief description -->
+<!-- List what was automatically applied to long-term memory with brief description -->
 
 ## Candidate Updates (needs your decision)
 <!-- Remaining proposals not auto-applied -->
@@ -100,6 +124,10 @@ Create `memory/review/TODAY.md` with:
 ## Stale Facts (needs your decision)
 <!-- Non-safe stale entries -->
 
+## Contradictions Detected
+<!-- Memory says X but daily notes say Y -->
+<!-- Each with: type, classification, memory citation, daily-note citation, recommendation -->
+
 ## Trends
 <!-- Output from trend_detection.py — recurring issues, stale projects, escalated patterns -->
 <!-- If script produced no output, write: "No trends detected." -->
@@ -113,10 +141,10 @@ Create `memory/review/TODAY.md` with:
 - Hard cap: ~50 lines per section
 - Memory Classes: family facts = very high threshold; project state = medium; operational = explicit decision marker required
 - NEGATIVE RULES: NEVER add credentials, tokens, API keys, volatile URLs, temp debug info, ephemeral session info
-- Skip suggestions with status "rejected" or "deferred" in state.json
+- Skip suggestions with status `rejected` or `deferred` in state.json
 
 ### Step 9: Update state.json
-Preserve all existing entries. Add new suggestions as "pending". Auto-applied ones as "accepted".
+Preserve all existing entries. Add new suggestions as `pending`. Auto-applied ones as `accepted`.
 
 ### Step 10: Write health sentinel
 Write ISO timestamp to `memory/review/.last-success`
@@ -126,3 +154,4 @@ Write ISO timestamp to `memory/review/.last-success`
 - Use read tool for files, write tool to create/update files
 - Be conservative with auto-apply — when in doubt, leave for human review
 - Every suggestion needs source citation
+- Keep backward compatibility: if sectioned memory has not been initialized yet, operate fully on `MEMORY.md`
