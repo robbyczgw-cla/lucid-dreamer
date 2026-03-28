@@ -1,1 +1,4 @@
 __pycache__/
+ROADMAP*.md
+*.private.md
+.local/
