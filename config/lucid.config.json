@@ -40,7 +40,7 @@
   "notifications": {
     "announceOnDelivery": true,
     "channel": "telegram",
-    "topic": "telegram:-1003796178074:topic:6"
+    "topic": null
   },
   "aggressiveCleanup": {
     "enabled": true,

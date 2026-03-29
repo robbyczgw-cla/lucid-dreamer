@@ -3,7 +3,7 @@
 ## Candidate Updates
 
 ### 1. Atlas Agent — New Infrastructure (high confidence)
-- **Add to Projects section:** `atlas-node` VM (Tailscale `100.88.14.22`) running Atlas agent with GPT-5.4 via OAuth, systemd service `atlas-gateway.service`, Telegram bot `7990012345:FAKE_TOKEN_SAMPLE`, lightweight vector memory enabled
+- **Add to Projects section:** `atlas-node` VM (Tailscale `10.0.0.42`) running Atlas agent with GPT-5.4 via OAuth, systemd service `atlas-gateway.service`, Telegram bot `7990012345:FAKE_TOKEN_SAMPLE`, lightweight vector memory enabled
 - **Source:** `memory/2026-03-15.md` (Atlas Agent Setup) + `memory/2026-03-13.md` (initial install)
 - **Context:** Replaces `old-orbit` (retired 2026-03-13), `Pilot` vs `Atlas` decision still pending as of 2026-03-15
 
@@ -106,7 +106,7 @@
 - **Source:** `memory/2026-03-14.md` (Infrastructure Notes) + `memory/2026-03-11.md`
 
 ### 2. Old Orbit Server — Deleted
-- **Previously:** Multiple references to `100.101.24.18` / `orbit.tail12345.ts.net` / `oldorbit.tail12345.ts.net` as experimental servers
+- **Previously:** Multiple references to `10.0.0.43` / `orbit.tail12345.ts.net` / `oldorbit.tail12345.ts.net` as experimental servers
 - **Now:** Deleted by Alex 2026-03-13 — no active server at that IP
 - MEMORY.md appears clean of these references already
 - **Source:** `memory/2026-03-13.md` (end: "Old Orbit — deleted")
