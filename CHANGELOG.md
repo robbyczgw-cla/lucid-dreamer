@@ -4,23 +4,26 @@ All notable changes to Lucid will be documented in this file.
 
 Format based on [Keep a Changelog](https://keepachangelog.com/).
 
-## [Unreleased]
+## [Unreleased] — "Sharper Dreams"
 
-## [0.6.0] - Unreleased — "Sharper Dreams"
+### Planned
+- **Memory Section Split**: MEMORY.md → `memory/sections/*.md` via `scripts/migrate_memory.py`. Selective loading, reduced context bloat.
+- **Memory Index**: Auto-generated `memory/index.md` manifest with section descriptions and last-updated timestamps.
+- **Session Debrief** (`prompts/session-debrief.md`): Lightweight end-of-day quick-capture prompt (target: <2 min, <5k tokens).
+- **Contradiction Detection**: Step 6b in nightly review — compares memory vs daily notes, classifies as factual vs judgment.
+- **Memory Loading Guidance** (`prompts/memory-loading-guidance.md`): Instructions for selective section loading.
+
+### Attribution (for planned features)
+Architecture inspired by [ByteRover](https://github.com/openclaw/openclaw/pull/50848)'s Context Engine approach — hierarchical memory tree, after-turn learning, contradiction detection. Lucid adapts these as a zero-dependency skill.
+
+## [0.6.0] - 2026-03-29
 
 ### Added
-- **Memory Section Split**: MEMORY.md can now be split into `memory/sections/*.md` via `scripts/migrate_memory.py`. Enables selective loading and reduces context bloat.
-- **Memory Index**: Auto-generated `memory/index.md` manifest with section descriptions and last-updated timestamps.
-- **Session Debrief** (`prompts/session-debrief.md`): Lightweight end-of-day quick-capture prompt (target: <2 min, <5k tokens). Captures decisions, new facts, and action items without generating a full review.
-- **Contradiction Detection**: New Step 6b in nightly review — compares memory sections against last 7 days of daily notes, classifies contradictions as factual (auto-apply safe) vs judgment (human review).
-- **Memory Loading Guidance** (`prompts/memory-loading-guidance.md`): Instructions for AI agents on selective section loading.
+- **Aggressive Cleanup** (opt-in): When enabled via `aggressiveCleanup.enabled` in config, Lucid auto-removes resolved Open Loops, closed Blockers, and confirmed-stale entries from MEMORY.md. Each removal is a separate git commit for easy rollback. Removed items are listed in the review file under `## 🗑️ Removed (Auto-Cleanup)` with git hashes. Default: off.
 
 ### Changed
-- `prompts/nightly-review.md`: Now reads `memory/sections/*.md` with backward-compatible fallback to `MEMORY.md`
-- `config/auto-apply.md`: Added factual contradictions as safe auto-apply category, updated paths for sectioned memory
-
-### Attribution
-Architecture inspired by [ByteRover](https://github.com/openclaw/openclaw/pull/50848)'s Context Engine approach — specifically the hierarchical memory tree, after-turn learning pattern, and contradiction detection concepts. Lucid adapts these ideas as a zero-dependency skill rather than a native plugin.
+- `prompts/nightly-review.md`: New Step 7a for aggressive cleanup workflow
+- `config/auto-apply.md`: Added aggressive cleanup section with criteria and rollback docs
 
 ## [0.5.0] — 2026-03-27
 
