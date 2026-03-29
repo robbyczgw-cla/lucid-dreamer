@@ -16,6 +16,11 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 ### Attribution (for planned features)
 Architecture inspired by [ByteRover](https://github.com/openclaw/openclaw/pull/50848)'s Context Engine approach — hierarchical memory tree, after-turn learning, contradiction detection. Lucid adapts these as a zero-dependency skill.
 
+## [0.6.4] - 2026-03-29
+
+### Changed
+- **README rewrite:** Cleaner structure, removed bloat, sectioned memory moved to Roadmap, no more false claims about unreleased features. Honest about what's shipped vs planned.
+
 ## [0.6.3] - 2026-03-29
 
 ### Fixed
