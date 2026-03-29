@@ -3,7 +3,7 @@
 ## Candidate Updates
 
 ### 1. Atlas Agent — New Infrastructure (high confidence)
-- **Add to Projects section:** `atlas-node` VM (Tailscale `10.0.0.42`) running Atlas agent with GPT-5.4 via OAuth, systemd service `atlas-gateway.service`, Telegram bot `7990012345:FAKE_TOKEN_SAMPLE`, lightweight vector memory enabled
+- **Add to Projects section:** `atlas-node` VM (Tailscale `10.0.0.42`) running Atlas agent with GPT-5.4 via OAuth, systemd service `atlas-gateway.service`, lightweight vector memory enabled
 - **Source:** `memory/2026-03-15.md` (Atlas Agent Setup) + `memory/2026-03-13.md` (initial install)
 - **Context:** Replaces `old-orbit` (retired 2026-03-13), `Pilot` vs `Atlas` decision still pending as of 2026-03-15
 
