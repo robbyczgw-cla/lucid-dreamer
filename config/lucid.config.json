@@ -1,5 +1,5 @@
 {
-  "_comment": "Lucid configuration \u2014 all features can be enabled/disabled per preference. Defaults are tuned for most users.",
+  "_comment": "Lucid configuration — all features can be enabled/disabled per preference. Defaults are tuned for most users.",
   "trends": {
     "enabled": true,
     "recurringIssues": {
@@ -41,5 +41,9 @@
     "announceOnDelivery": true,
     "channel": "telegram",
     "topic": "telegram:-1003796178074:topic:6"
+  },
+  "aggressiveCleanup": {
+    "enabled": true,
+    "_comment": "When enabled, Lucid auto-removes resolved Open Loops, closed Blockers, and confirmed-stale entries from MEMORY.md instead of just flagging them. Removals are git-committed for easy rollback. Default: off."
   }
 }

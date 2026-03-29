@@ -83,6 +83,34 @@ Do NOT auto-apply:
 - Anything you are uncertain about
 - Anything with medium or low confidence
 
+### Step 7a: Aggressive Cleanup (if enabled)
+
+Read `config/lucid.config.json`. If `aggressiveCleanup.enabled` is `true`:
+
+1. Scan Open Loops and Blockers from the previous review (or from MEMORY.md directly)
+2. For each item, check if the last 7 days of daily notes contain an explicit closure signal
+3. Closure signals include: "done", "fixed", "deployed", "merged", "removed", "cancelled", "resolved", "no longer needed", "erledigt", "gefixt", "fertig"
+4. If HIGH confidence that the item is resolved:
+   a. Remove it from the relevant memory file (`MEMORY.md` or `memory/sections/*.md`)
+   b. Git commit: `cd "${CLAWD_DIR:-.}" && git add MEMORY.md memory/sections && git commit -m "dreamer: cleanup — removed resolved [type]: [brief description]"`
+   c. Track in `state.json` with status `removed` and include the original text for reference
+5. Add all removals to the review file under `## 🗑️ Removed (Auto-Cleanup)`
+
+The removed section format:
+
+```
+## 🗑️ Removed (Auto-Cleanup)
+
+| # | What | Why | Git Hash |
+|---|------|-----|----------|
+| 1 | Open Loop: OAuth regression blocker | Fixed in v2026.3.28, deployed 03-29 | abc1234 |
+| 2 | Blocker: Discord Gateway Crasher | Plugin disabled, no crashes for 5 days | def5678 |
+
+To undo: `git revert <hash>` or tell your agent "revert cleanup #1"
+```
+
+If `aggressiveCleanup.enabled` is `false` or not set, skip this step entirely.
+
 ### Step 7b: Run Trend Detection
 
 Run the trend detection script to analyze patterns across the last 14 days:
@@ -107,6 +135,11 @@ Create `memory/review/TODAY.md` with:
 
 ## ✅ Auto-Applied
 <!-- List what was automatically applied to long-term memory with brief description -->
+
+## 🗑️ Removed (Auto-Cleanup)
+<!-- Only present when aggressiveCleanup is enabled -->
+<!-- List removed entries with: #, what was removed, why (closure evidence), git commit hash -->
+<!-- "To undo: git revert <hash>" -->
 
 ## Candidate Updates (needs your decision)
 <!-- Remaining proposals not auto-applied -->

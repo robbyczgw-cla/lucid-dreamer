@@ -183,6 +183,20 @@ config/auto-apply.md
 
 All auto-applied changes are git-committed with a `dreamer: auto-apply —` prefix so you can always `git revert` them.
 
+## Aggressive Cleanup (v0.6.0, opt-in)
+
+If you want Lucid to go beyond flagging stale items and actually **remove resolved entries** from long-term memory, enable aggressive cleanup in `config/lucid.config.json`:
+
+```json
+"aggressiveCleanup": {
+  "enabled": true
+}
+```
+
+When enabled, Lucid can remove resolved Open Loops, closed Blockers, and explicitly deleted/abandoned factual entries — but only with **high confidence** and explicit closure evidence from the last 7 days of notes.
+
+Each removal is written as a **separate local git commit** and listed in the nightly review under `## 🗑️ Removed (Auto-Cleanup)` with the commit hash. To undo any cleanup, run `git revert <hash>`.
+
 ## Safety Rules
 
 Lucid is conservative by design:

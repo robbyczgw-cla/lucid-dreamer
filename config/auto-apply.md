@@ -36,6 +36,30 @@ These are always manual regardless of confidence:
 - Anything you are uncertain about
 - Anything with medium or low confidence
 
+## 🗑️ Aggressive Cleanup (opt-in)
+
+When `aggressiveCleanup.enabled` is `true` in `lucid.config.json`, Lucid will also **remove** entries from long-term memory that meet ALL of these criteria:
+
+- The item is an Open Loop, Blocker, or factual entry
+- Daily notes from the last 7 days contain **explicit closure signal** (e.g., "done", "fixed", "deployed", "removed", "cancelled", "no longer needed")
+- The closure signal appears on **2+ separate days** OR is unambiguously final (e.g., "project deleted", "service decommissioned")
+- Confidence is HIGH
+
+**What gets removed:**
+- Open Loops with confirmed resolution
+- Blockers that are no longer blocking (fix deployed, workaround in place)
+- Infrastructure entries for removed services/ports/crons
+- Project entries for abandoned/deleted projects (only if explicitly stated)
+
+**What NEVER gets removed (even with aggressive cleanup on):**
+- Key Decisions (historical record)
+- Belief Updates (trajectory matters)
+- Family/personal facts
+- Lessons Learned (knowledge is permanent)
+- Active projects (even if not mentioned recently)
+
+**Rollback:** Every removal is a separate git commit. Use `git revert <hash>` to restore any removed entry.
+
 ## Target Files
 
 When a safe change is accepted, prefer these targets:
