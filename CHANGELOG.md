@@ -16,6 +16,12 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 ### Attribution (for planned features)
 Architecture inspired by [ByteRover](https://github.com/openclaw/openclaw/pull/50848)'s Context Engine approach — hierarchical memory tree, after-turn learning, contradiction detection. Lucid adapts these as a zero-dependency skill.
 
+## [0.6.1] - 2026-03-29
+
+### Fixed
+- **Config defaults now match documentation:** `autoApply.enabled`, `aggressiveCleanup.enabled`, and `announceOnDelivery` all default to `false` in shipped config. Previously shipped as `true`, contradicting README/SKILL.md claims of "opt-in, default off."
+- Removed hardcoded notification channel from default config
+
 ## [0.6.0] - 2026-03-29
 
 ### Added
