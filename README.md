@@ -46,24 +46,11 @@ Daily Notes (7 days)     MEMORY.md + USER.md
 
 **Cost:** One LLM call per night (~$0.20 with Sonnet, less with Haiku).
 
-## Architecture (v0.6.0+)
+## Planned: Sectioned Memory (upcoming)
 
-Lucid now supports **sectioned memory**:
+> ⚠️ **Not yet released.** These features are in development and included as experimental prompts/scripts. They are not part of the default nightly review workflow.
 
-```text
-memory/
-├── index.md              # Manifest of sections + descriptions + last-updated
-└── sections/
-    ├── identity.md
-    ├── operations.md
-    └── *.md
-```
-
-Selective loading keeps context smaller: read `memory/index.md` first, always load `identity.md` and `operations.md`, then load other sections only when the task needs them.
-
-A new **session debrief** prompt (`prompts/session-debrief.md`) makes end-of-day capture fast: a lightweight pass meant to take under 2 minutes and stay under ~5k tokens.
-
-This architecture is partly inspired by ByteRover's Context Engine ideas around hierarchical memory, after-turn learning, and contradiction detection.
+Future versions will support splitting `MEMORY.md` into `memory/sections/*.md` for selective loading, a lightweight session debrief prompt, and contradiction detection. See [CHANGELOG.md](CHANGELOG.md) under `[Unreleased]` for details.
 
 ## Quick Start
 
