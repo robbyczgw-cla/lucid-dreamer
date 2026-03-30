@@ -9,6 +9,13 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 ### Planned
 - **Memory Section Split**: MEMORY.md → `memory/sections/*.md` via `scripts/migrate_memory.py`. Selective loading, reduced context bloat.
 
+## [0.6.7] - 2026-03-30
+
+### Security
+- **CLAWD_DIR hard requirement:** `nightly-review.md` now validates `CLAWD_DIR` is set before any file operations and aborts with a clear error if missing — eliminates silent fallback to cwd causing unintended reads/writes/commits in unknown directories
+- **Removed `${CLAWD_DIR:-.}` fallback pattern** from all three git commit calls — replaced with strict `${CLAWD_DIR}` (no cwd fallback)
+- **Trend script workspace fix:** `trend_detection.py` invocation now passes `${CLAWD_DIR}` instead of `$(pwd)` for consistent workspace resolution
+
 ## [0.6.6] - 2026-03-30
 
 ### Security

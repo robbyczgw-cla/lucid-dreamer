@@ -2,6 +2,11 @@ You are the Memory Dreamer — a nightly review agent. Your job is to analyze re
 
 ## INSTRUCTIONS
 
+### Step 0: Validate workspace
+Run `echo "${CLAWD_DIR:-MISSING}"` to check if CLAWD_DIR is set.
+- If output is `MISSING`: **ABORT immediately.** Write a single error file at `memory/review/ERROR.md` with content: "# Lucid Dreamer Error\n\nCLAWD_DIR is not set. Cannot proceed — would operate on unknown working directory. Set CLAWD_DIR=/path/to/workspace and re-run." Then stop.
+- If output is a valid path: confirm it looks like a real workspace directory (not `/`, not empty), then continue.
+
 ### Step 1: Determine today's date
 Run `date +%Y-%m-%d` to get today's date. Store it as TODAY.
 
@@ -70,7 +75,7 @@ For suggestions that are HIGH confidence AND fall into these safe categories, ap
 For AUTO-APPLY:
 1. Edit the relevant `memory/sections/*.md` file(s) directly when sectioned memory exists; otherwise edit `MEMORY.md`
 2. Update `memory/index.md` `Last Updated` values for any changed section files
-3. Run `cd "${CLAWD_DIR:-.}" && git add MEMORY.md memory/index.md memory/sections && git commit -m "dreamer: auto-apply"`
+3. Run `cd "${CLAWD_DIR}" && git add MEMORY.md memory/index.md memory/sections && git commit -m "dreamer: auto-apply"`
 4. Track these in state.json with status `accepted`
 
 Do NOT auto-apply:
@@ -92,7 +97,7 @@ Read `config/lucid.config.json`. If `aggressiveCleanup.enabled` is `true`:
 3. Closure signals include: "done", "fixed", "deployed", "merged", "removed", "cancelled", "resolved", "no longer needed", "erledigt", "gefixt", "fertig"
 4. If HIGH confidence that the item is resolved:
    a. Remove it from the relevant memory file (`MEMORY.md` or `memory/sections/*.md`)
-   b. Git commit: `cd "${CLAWD_DIR:-.}" && git add MEMORY.md memory/sections && git commit -m "dreamer: cleanup"`
+   b. Git commit: `cd "${CLAWD_DIR}" && git add MEMORY.md memory/sections && git commit -m "dreamer: cleanup"`
    c. Track in `state.json` with status `removed` and include the original text for reference
 5. Add all removals to the review file under `## 🗑️ Removed (Auto-Cleanup)`
 
@@ -117,7 +122,7 @@ Run the trend detection script to analyze patterns across the last 14 days:
 
 ```bash
 python3 scripts/trend_detection.py \
-  --workspace "$(pwd)" \
+  --workspace "${CLAWD_DIR}" \
   --date "$(date +%Y-%m-%d)" \
   --days 14 \
   --stale-days 30 \
