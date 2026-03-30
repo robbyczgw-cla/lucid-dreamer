@@ -8,6 +8,13 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ### Planned
 - **Memory Section Split**: MEMORY.md → `memory/sections/*.md` via `scripts/migrate_memory.py`. Selective loading, reduced context bloat.
+
+## [0.6.5] - 2026-03-30
+
+### Added
+- **Pre-flight flush prompt** (`prompts/pre-flight-flush.md`): Optional cron at 02:45 Vienna time that appends today's session context to the daily memory file before Lucid runs at 03:00. Ensures Lucid always reads fresh data even when the main session wasn't manually flushed. Use `append` mode — never overwrites existing content.
+
+- **Memory Index**: Auto-generated `memory/index.md` manifest with section descriptions and last-updated timestamps.
 - **Memory Index**: Auto-generated `memory/index.md` manifest with section descriptions and last-updated timestamps.
 - **Session Debrief** (`prompts/session-debrief.md`): Lightweight end-of-day quick-capture prompt (target: <2 min, <5k tokens).
 - **Contradiction Detection**: Step 6b in nightly review — compares memory vs daily notes, classifies as factual vs judgment.

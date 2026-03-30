@@ -71,6 +71,12 @@ cat memory/review/YYYY-MM-DD.md
 
 Tell your agent what to accept or reject. It handles the rest.
 
+### Optional: Pre-flight Flush (Recommended)
+
+Add a cron at 02:45 Vienna time using `prompts/pre-flight-flush.md` as the message. This ensures your daily memory file is up-to-date before Lucid runs at 03:00, even if you forgot to manually flush your session.
+
+Cron schedule: `45 2 * * *` tz: Europe/Vienna
+
 ### Without OpenClaw
 
 Lucid is just a prompt. Copy `prompts/nightly-review.md`, give it to any LLM that can read and write files, and run it on a schedule.
