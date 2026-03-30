@@ -14,6 +14,11 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 ### Security
 - **Shell injection hardening:** Git commit messages in `prompts/nightly-review.md` are now static strings instead of AI-generated dynamic content, eliminating potential shell injection via indirect prompt injection from markdown notes.
 
+## [0.6.6] - 2026-03-30
+
+### Fixed
+- Version bump (previous version already published)
+
 ## [0.6.5] - 2026-03-30
 
 ### Added
@@ -27,6 +32,11 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ### Attribution (for planned features)
 Architecture inspired by [ByteRover](https://github.com/openclaw/openclaw/pull/50848)'s Context Engine approach — hierarchical memory tree, after-turn learning, contradiction detection. Lucid adapts these as a zero-dependency skill.
+
+## [0.6.6] - 2026-03-30
+
+### Fixed
+- Version bump (previous version already published)
 
 ## [0.6.5] - 2026-03-30
 
