@@ -9,6 +9,11 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 ### Planned
 - **Memory Section Split**: MEMORY.md → `memory/sections/*.md` via `scripts/migrate_memory.py`. Selective loading, reduced context bloat.
 
+## [0.6.6] - 2026-03-30
+
+### Security
+- **Shell injection hardening:** Git commit messages in `prompts/nightly-review.md` are now static strings instead of AI-generated dynamic content, eliminating potential shell injection via indirect prompt injection from markdown notes.
+
 ## [0.6.5] - 2026-03-30
 
 ### Added

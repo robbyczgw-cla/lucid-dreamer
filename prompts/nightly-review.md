@@ -70,7 +70,7 @@ For suggestions that are HIGH confidence AND fall into these safe categories, ap
 For AUTO-APPLY:
 1. Edit the relevant `memory/sections/*.md` file(s) directly when sectioned memory exists; otherwise edit `MEMORY.md`
 2. Update `memory/index.md` `Last Updated` values for any changed section files
-3. Run `cd "${CLAWD_DIR:-.}" && git add MEMORY.md memory/index.md memory/sections && git commit -m "dreamer: auto-apply — DESCRIPTION"`
+3. Run `cd "${CLAWD_DIR:-.}" && git add MEMORY.md memory/index.md memory/sections && git commit -m "dreamer: auto-apply"`
 4. Track these in state.json with status `accepted`
 
 Do NOT auto-apply:
@@ -92,7 +92,7 @@ Read `config/lucid.config.json`. If `aggressiveCleanup.enabled` is `true`:
 3. Closure signals include: "done", "fixed", "deployed", "merged", "removed", "cancelled", "resolved", "no longer needed", "erledigt", "gefixt", "fertig"
 4. If HIGH confidence that the item is resolved:
    a. Remove it from the relevant memory file (`MEMORY.md` or `memory/sections/*.md`)
-   b. Git commit: `cd "${CLAWD_DIR:-.}" && git add MEMORY.md memory/sections && git commit -m "dreamer: cleanup — removed resolved [type]: [brief description]"`
+   b. Git commit: `cd "${CLAWD_DIR:-.}" && git add MEMORY.md memory/sections && git commit -m "dreamer: cleanup"`
    c. Track in `state.json` with status `removed` and include the original text for reference
 5. Add all removals to the review file under `## 🗑️ Removed (Auto-Cleanup)`
 
