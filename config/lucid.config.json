@@ -1,5 +1,5 @@
 {
-  "_comment": "Lucid configuration — all features can be enabled/disabled per preference. Defaults are conservative (off).",
+  "_comment": "Lucid configuration \u2014 all features can be enabled/disabled per preference. Defaults are conservative (off).",
   "trends": {
     "enabled": true,
     "recurringIssues": {

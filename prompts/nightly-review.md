@@ -2,10 +2,10 @@ You are the Memory Dreamer — a nightly review agent. Your job is to analyze re
 
 ## INSTRUCTIONS
 
-### Step 0: Resolve workspace
-Run `echo "${CLAWD_DIR:-$(pwd)}"` to determine the workspace path. Use this as your base directory for all subsequent steps.
-- If CLAWD_DIR is set: use it.
-- If not set: use current working directory (`pwd`) as the workspace.
+### Step 0: Validate workspace
+Run `echo "${CLAWD_DIR:-MISSING}"` to check if CLAWD_DIR is set.
+- If output is `MISSING`: **ABORT immediately.** Write a single error file at `memory/review/ERROR.md` with content: "CLAWD_DIR is not set. Set CLAWD_DIR=/path/to/workspace and re-run." Then stop.
+- If set: use `$CLAWD_DIR` as your base directory for all subsequent steps.
 - If output is a valid path: confirm it looks like a real workspace directory (not `/`, not empty), then continue.
 
 ### Step 1: Determine today's date
