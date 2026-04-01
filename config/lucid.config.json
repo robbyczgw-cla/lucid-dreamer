@@ -17,7 +17,7 @@
     }
   },
   "autoApply": {
-    "enabled": true,
+    "enabled": false,
     "categories": {
       "versionNumbers": true,
       "staleCronIds": true,
@@ -43,7 +43,7 @@
     "topic": null
   },
   "aggressiveCleanup": {
-    "enabled": true,
+    "enabled": false,
     "_comment": "When enabled, Lucid auto-removes resolved Open Loops, closed Blockers, and confirmed-stale entries from MEMORY.md instead of just flagging them. Removals are git-committed for easy rollback. Default: off."
   }
 }
