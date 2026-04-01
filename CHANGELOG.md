@@ -9,6 +9,15 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 ### Planned
 - **Memory Section Split**: MEMORY.md → `memory/sections/*.md` via `scripts/migrate_memory.py`. Selective loading, reduced context bloat.
 
+## [0.7.0] - 2026-04-01
+
+### Added
+- **Session Debrief Cron docs**: Documented the optional ~18:00 quick-capture cron in `SKILL.md` and `README.md`, including recommended OpenClaw settings (isolated session, `wakeMode: now`, model of your choice) and clarified that it reads today's daily note and writes key decisions/facts directly to memory.
+- **Contradiction detection**: Nightly review now documents a dedicated contradiction scan plus `## ⚡ Contradictions Detected` output for memory-vs-note conflicts across version, status, existence, value, and decision-reversal changes.
+
+### Changed
+- **Auto-apply config**: Explicitly includes factual contradictions as an auto-apply-safe category when confidence is high.
+
 ## [0.6.7] - 2026-03-30
 
 ### Security

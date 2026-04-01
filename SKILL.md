@@ -1,7 +1,7 @@
 ---
 name: lucid-dreamer
-version: 0.6.7
-description: "Nightly AI memory reasoning system. Lucid runs every night while you sleep — it reads your daily notes and memory files, detects stale facts, unresolved todos, recurring problems, forgotten decisions, and can optionally perform aggressive cleanup of resolved Open Loops, closed Blockers, and confirmed-stale entries with git-backed rollback. v0.6.0 adds aggressive cleanup plus Trend Detection for recurring issues, stale projects, and escalated patterns across 14 days of notes. Zero dependencies, no database, no embeddings. Just a cron job and markdown files. Use when you want your AI agent to automatically maintain and improve its long-term memory over time. Triggers on \"memory dreamer\", \"nightly memory review\", \"lucid\", \"auto memory\", \"memory cleanup\", \"memory hygiene\"."
+version: 0.7.0
+description: "Nightly AI memory reasoning system. Lucid runs every night while you sleep — it reads your daily notes and memory files, detects stale facts, unresolved todos, recurring problems, forgotten decisions, and can optionally perform aggressive cleanup and contradiction detection. Includes optional session debrief for quick end-of-day memory capture. Zero dependencies, no database, no embeddings. Just a cron job and markdown files. Use when you want your AI agent to automatically maintain and improve its long-term memory over time. Triggers on \"memory dreamer\", \"nightly memory review\", \"lucid\", \"auto memory\", \"memory cleanup\", \"memory hygiene\"."
 metadata: {"openclaw":{"requires":{"bins":["git","date","python3"],"env":{"CLAWD_DIR":"optional — workspace path, defaults to cwd"},"note":"Set CLAWD_DIR to your workspace. Auto-apply is opt-in and disabled by default. python3 required for trend detection."}}}
 ---
 
@@ -22,13 +22,39 @@ See `README.md` for full setup, `ARCHITECTURE.md` for internals, and `config/` f
 
 2. Create a nightly cron job using OpenClaw's cron tool — run the prompt in `prompts/nightly-review.md` at 3 AM.
 
+   Optional: add a lightweight session debrief cron around 18:00 using `prompts/session-debrief.md`. This is a faster daily capture pass than the nightly review — it reads today's daily note and writes durable decisions/facts straight into memory without creating a review report.
+
 3. Wake up to a review report in `memory/review/YYYY-MM-DD.md`.
 
 4. Approve or reject suggestions — Lucid tracks state in `memory/review/state.json`.
 
+## Optional Session Debrief Cron
+
+Use `prompts/session-debrief.md` for a quick end-of-day memory pass around 18:00. It is designed to run faster than the nightly review: read today's daily note, capture durable decisions/facts/action items, and write them directly into memory.
+
+Recommended OpenClaw cron settings:
+
+```bash
+openclaw cron add \
+  --name "lucid-debrief" \
+  --cron "0 18 * * *" \
+  --tz "Europe/Vienna" \
+  --model "your-preferred-model" \  # e.g. anthropic/claude-haiku-4-5 or opencode-go/minimax-m2.7
+  --session isolated \
+  --wake-mode now \
+  --message "$(cat prompts/session-debrief.md)"
+```
+
+What it does:
+- Reads today's daily note (`memory/TODAY.md`)
+- Captures key decisions, durable facts, and concrete action items
+- Writes those updates directly into long-term memory
+- Skips the full review report to stay quick and cheap
+
 ## Files
 
 - `prompts/nightly-review.md` — the main nightly review prompt
+- `prompts/session-debrief.md` — optional quick-capture prompt for ~18:00
 - `config/` — thresholds and behavior settings
 - `examples/` — sample review output and state file
 

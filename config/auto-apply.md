@@ -22,7 +22,7 @@ Edit this list to match your project's needs.
 - **Model Strategy** — agent counts, new agent entries when clearly documented with model + alias
 - **Closed Open Loops** — remove resolved items when explicit closure signal exists on 2+ days
 - **Stale project status** — update "planning"/"in progress" to "live" when URL + service confirmed on 2+ days
-- **Factual contradictions** — objective memory-vs-note conflicts where newer daily note evidence clearly supersedes the old value
+- **Factual contradictions** — objective memory-vs-note conflicts where newer daily note evidence clearly supersedes the old value and is safe to auto-apply
 
 ## ❌ Never Auto-Apply (hardcoded)
 

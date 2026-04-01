@@ -162,7 +162,7 @@ Create `memory/review/TODAY.md` with:
 ## Stale Facts (needs your decision)
 <!-- Non-safe stale entries -->
 
-## Contradictions Detected
+## ⚡ Contradictions Detected
 <!-- Memory says X but daily notes say Y -->
 <!-- Each with: type, classification, memory citation, daily-note citation, recommendation -->
 

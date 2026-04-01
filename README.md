@@ -77,6 +77,29 @@ Add a cron at 02:45 Vienna time using `prompts/pre-flight-flush.md` as the messa
 
 Cron schedule: `45 2 * * *` tz: Europe/Vienna
 
+### Optional: Session Debrief at ~18:00
+
+Session debrief is a quick daily capture pass that runs before the full nightly review. It is meant for a fast end-of-day sweep: read today's daily note, pull out key decisions and durable facts, and write them directly into memory without generating a review report.
+
+Recommended OpenClaw cron:
+
+```bash
+openclaw cron add \
+  --name "lucid-debrief" \
+  --cron "0 18 * * *" \
+  --tz "Europe/Vienna" \
+  --model "your-preferred-model" \  # e.g. anthropic/claude-haiku-4-5 or opencode-go/minimax-m2.7
+  --session isolated \
+  --wake-mode now \
+  --message "$(cat prompts/session-debrief.md)"
+```
+
+Why use it:
+- Faster and cheaper than the nightly review
+- Reads today's daily note only
+- Writes key decisions/facts directly to memory
+- Keeps memory fresher before the 03:00 full review
+
 ### Without OpenClaw
 
 Lucid is just a prompt. Copy `prompts/nightly-review.md`, give it to any LLM that can read and write files, and run it on a schedule.
@@ -118,7 +141,7 @@ Automatically apply high-confidence changes without review. Enable in `config/lu
 ```
 
 Configure categories in `config/auto-apply.md`:
-- Version numbers, new project entries, infrastructure facts, lessons learned, closed open loops, stale project status
+- Version numbers, new project entries, infrastructure facts, lessons learned, closed open loops, stale project status, factual contradictions
 
 Never auto-applied (hardcoded): belief updates, key decisions, family/personal facts, anything medium/low confidence.
 
@@ -176,8 +199,8 @@ python3 scripts/trend_detection.py \
 - [x] Trend Detection (recurring issues, stale projects, escalated patterns)
 - [x] Aggressive Cleanup (opt-in, git-backed rollback)
 - [ ] Sectioned memory (`memory/sections/*.md` with selective loading)
-- [ ] Session debrief (lightweight end-of-day capture)
-- [ ] Contradiction detection (memory vs daily notes)
+- [x] Session debrief (lightweight end-of-day capture)
+- [x] Contradiction detection (memory vs daily notes)
 - [ ] Embedding-based dedup
 - [ ] Weekly consolidation
 
