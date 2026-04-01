@@ -9,6 +9,11 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 ### Planned
 - **Memory Section Split**: MEMORY.md → `memory/sections/*.md` via `scripts/migrate_memory.py`. Selective loading, reduced context bloat.
 
+## [0.7.2] - 2026-04-01
+
+### Fixed
+- Reverted CLAWD_DIR metadata to optional (was causing false-positive security flag on ClawHub)
+
 ## [0.7.1] - 2026-04-01
 
 ### Fixed
