@@ -9,6 +9,12 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 ### Planned
 - **Memory Section Split**: MEMORY.md → `memory/sections/*.md` via `scripts/migrate_memory.py`. Selective loading, reduced context bloat.
 
+## [0.7.1] - 2026-04-01
+
+### Fixed
+- **Config defaults**: `autoApply.enabled` and `aggressiveCleanup.enabled` now correctly default to `false` in shipped `lucid.config.json` (were incorrectly set to `true`)
+- **CLAWD_DIR metadata**: marked as `required` in SKILL.md registry metadata (was incorrectly listed as optional)
+
 ## [0.7.0] - 2026-04-01
 
 ### Added
